@@ -1,0 +1,31 @@
+.headers {
+    /* color: rgb(141, 95, 11); */
+}
+
+.container {
+    background-color: rgb(194, 148, 63, 0.7);
+    width: 150px;
+    border-radius: 5px;
+}
+
+.img {
+    width: 150px;
+}
+
+.tops-box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+}
+
+.top {
+    background-color: #98522c;
+    padding: 5px;
+    border-radius: 2px;
+}
+
+.top:hover {
+    color: red;
+}
