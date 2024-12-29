@@ -1,27 +1,23 @@
 
 import { TurtleObj, ToppingObj } from "../interfaces"
 import styles from "./Turtle.module.css"
-import { useContext } from 'react'
-import ToppingContext from "../../services/toppingsProvider"
-
-interface contectType {
-    toppings: ToppingObj[];
-    setList: (someParam:ToppingObj[]) => void;
-    msg: string;
-    setMsg: (someParam: string) => void;
-}
+import { useSelector, useDispatch } from "react-redux"
+import {  RootState } from "../../services/Store"
+import { setErr } from "../../services/MsgSlice"
+import { addTop } from "../../services/ToppingsSlice"
 
 function Turtle(props: {turtle: TurtleObj}) {
     const {name, img, pizzaToppings} = props.turtle
-    const {setList, setMsg, toppings} = useContext<contectType>(ToppingContext);
+    const toppings = useSelector((state: RootState) => state.toppings.topps)
+    const dispatch = useDispatch()
     function chooseTopping(topping: ToppingObj) {
         if (toppings.length >= 5)
-            setMsg("to many toppings")
+            dispatch(setErr("to many toppings"))
         else if (toppings.filter(top => top.name === topping.name).length > 0)
-            setMsg("this topping had chosen already")
+            dispatch(setErr("this topping had chosen already"))
         else {
-            setList([...toppings, topping])
-            setMsg("")
+            dispatch(addTop(topping))
+            dispatch(setErr(""))
         }
 
     }
